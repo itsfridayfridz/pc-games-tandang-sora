@@ -1,0 +1,1931 @@
+<!DOCTYPE html>
+<!-- saved from url=(0043)file:///C:/Users/vtsgu/Downloads/pcgts.html -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>PC Games Tandang Sora</title>
+<link href="./index_files/css2" rel="stylesheet">
+<style>
+  :root {
+    --bg: #08090d;
+    --bg2: #0e1018;
+    --bg3: #141720;
+    --card: #111420;
+    --border: #1e2235;
+    --accent: #00e5ff;
+    --accent2: #ff3c6e;
+    --accent3: #ffe600;
+    --text: #e8eaf0;
+    --muted: #6b7080;
+    --green: #00ff88;
+    --font-head: 'Barlow Condensed', sans-serif;
+    --font-body: 'Rajdhani', sans-serif;
+    --font-mono: 'Share Tech Mono', monospace;
+    --sidebar-w: 320px;
+  }
+
+  * { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body);
+    font-size: 15px;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* ── HEADER ── */
+  header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(8,9,13,0.95);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    padding: 10px 14px;
+  }
+  .header-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+  }
+  .logo {
+    font-family: var(--font-head);
+    font-weight: 800;
+    font-size: 20px;
+    letter-spacing: 0.5px;
+    line-height: 1;
+  }
+  .logo span { color: var(--accent); }
+  .logo small {
+    display: block;
+    font-size: 10px;
+    font-weight: 500;
+    color: var(--muted);
+    letter-spacing: 2px;
+    font-family: var(--font-mono);
+  }
+
+  .drive-btn {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--bg3);
+    border: 1px solid var(--accent);
+    color: var(--accent);
+    font-family: var(--font-head);
+    font-weight: 700;
+    font-size: 13px;
+    letter-spacing: 1px;
+    padding: 7px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    white-space: nowrap;
+  }
+  .drive-btn .icon { font-size: 16px; }
+
+  /* search */
+  .search-wrap {
+    position: relative;
+  }
+  .search-wrap input {
+    width: 100%;
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 9px 14px 9px 36px;
+    color: var(--text);
+    font-family: var(--font-body);
+    font-size: 14px;
+    outline: none;
+    transition: border-color .2s;
+  }
+  .search-wrap input:focus { border-color: var(--accent); }
+  .search-wrap input::placeholder { color: var(--muted); }
+  .search-icon {
+    position: absolute;
+    left: 11px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--muted);
+    font-size: 15px;
+    pointer-events: none;
+  }
+
+  /* ── CATEGORY PILLS ── */
+  .cats-wrap {
+    padding: 10px 14px;
+    overflow-x: auto;
+    display: flex;
+    gap: 7px;
+    scrollbar-width: none;
+    border-bottom: 1px solid var(--border);
+  }
+  .cats-wrap::-webkit-scrollbar { display: none; }
+  .cat-pill {
+    flex-shrink: 0;
+    padding: 5px 13px;
+    border-radius: 20px;
+    border: 1px solid var(--border);
+    background: var(--bg3);
+    color: var(--muted);
+    font-family: var(--font-head);
+    font-weight: 600;
+    font-size: 12px;
+    letter-spacing: .5px;
+    cursor: pointer;
+    transition: all .18s;
+    white-space: nowrap;
+  }
+  .cat-pill:hover { border-color: var(--accent); color: var(--accent); }
+  .cat-pill.active {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #000;
+  }
+
+  /* ── MAIN ── */
+  .main {
+    padding: 12px 10px 100px;
+  }
+
+  .section-label {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    padding: 0 4px;
+  }
+  .section-label span { color: var(--accent); }
+
+  /* ── GAME GRID ── */
+  .game-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+
+  @media (min-width: 480px) {
+    .game-grid { grid-template-columns: repeat(3, 1fr); }
+  }
+  @media (min-width: 700px) {
+    .game-grid { grid-template-columns: repeat(4, 1fr); }
+  }
+  @media (min-width: 900px) {
+    .game-grid { grid-template-columns: repeat(5, 1fr); }
+  }
+
+  .game-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    overflow: hidden;
+    transition: transform .15s, border-color .15s;
+    cursor: pointer;
+    position: relative;
+  }
+  .game-card:active { transform: scale(.97); }
+  .game-card.added {
+    border-color: var(--accent);
+    box-shadow: 0 0 12px rgba(0,229,255,.15);
+  }
+  .game-thumb {
+    width: 100%;
+    aspect-ratio: 3/4;
+    object-fit: cover;
+    display: block;
+    background: var(--bg3);
+  }
+  .game-thumb-placeholder {
+    width: 100%;
+    aspect-ratio: 3/4;
+    background: linear-gradient(135deg, var(--bg3) 0%, #1a1f30 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 32px;
+  }
+  .game-info {
+    padding: 7px 8px 9px;
+  }
+  .game-title {
+    font-family: var(--font-head);
+    font-weight: 700;
+    font-size: 13px;
+    line-height: 1.2;
+    margin-bottom: 4px;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  .game-meta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 7px;
+  }
+  .game-size {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--accent);
+  }
+  .game-genre {
+    font-size: 10px;
+    font-weight: 600;
+    padding: 2px 6px;
+    border-radius: 4px;
+    background: rgba(255,255,255,.06);
+    color: var(--muted);
+    font-family: var(--font-head);
+    letter-spacing: .5px;
+  }
+  .add-btn {
+    width: 100%;
+    padding: 7px;
+    border-radius: 6px;
+    border: 1px solid var(--border);
+    background: var(--bg2);
+    color: var(--text);
+    font-family: var(--font-head);
+    font-weight: 700;
+    font-size: 12px;
+    letter-spacing: .5px;
+    cursor: pointer;
+    transition: all .15s;
+  }
+  .add-btn:hover { border-color: var(--accent); color: var(--accent); }
+  .add-btn.added-state {
+    background: rgba(0,229,255,.12);
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+  .added-badge {
+    position: absolute;
+    top: 7px;
+    right: 7px;
+    background: var(--accent);
+    color: #000;
+    font-family: var(--font-mono);
+    font-size: 9px;
+    font-weight: bold;
+    padding: 2px 6px;
+    border-radius: 4px;
+  }
+
+  /* ── BOTTOM BAR ── */
+  .bottom-bar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 200;
+    background: rgba(14,16,24,0.97);
+    backdrop-filter: blur(16px);
+    border-top: 1px solid var(--border);
+    padding: 10px 14px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .bar-stats {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .bar-progress {
+    height: 4px;
+    background: var(--bg3);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  .bar-progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--accent), var(--accent2));
+    border-radius: 4px;
+    transition: width .3s ease;
+  }
+  .bar-progress-fill.over { background: var(--accent2); }
+  .bar-numbers {
+    display: flex;
+    justify-content: space-between;
+    font-family: var(--font-mono);
+    font-size: 11px;
+  }
+  .bar-used { color: var(--accent); }
+  .bar-remaining { color: var(--green); }
+  .bar-remaining.over { color: var(--accent2); }
+
+  .view-build-btn {
+    background: var(--accent);
+    color: #000;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 16px;
+    font-family: var(--font-head);
+    font-weight: 800;
+    font-size: 13px;
+    letter-spacing: .5px;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: opacity .15s;
+    position: relative;
+  }
+  .view-build-btn:active { opacity: .85; }
+  .view-build-btn .count {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: #000;
+    color: var(--accent);
+    border-radius: 50%;
+    width: 18px;
+    height: 18px;
+    font-size: 10px;
+    margin-left: 5px;
+    font-family: var(--font-mono);
+  }
+
+  /* ── DRIVE MODAL ── */
+  .modal-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 300;
+    background: rgba(0,0,0,.7);
+    backdrop-filter: blur(4px);
+    display: none;
+    align-items: flex-end;
+    justify-content: center;
+  }
+  .modal-overlay.open { display: flex; }
+  .modal-sheet {
+    background: var(--bg2);
+    border-radius: 18px 18px 0 0;
+    border: 1px solid var(--border);
+    border-bottom: none;
+    width: 100%;
+    max-width: 600px;
+    padding: 16px 16px 30px;
+    animation: slideUp .25s ease;
+  }
+  @keyframes slideUp {
+    from { transform: translateY(100%); }
+    to { transform: translateY(0); }
+  }
+  .sheet-handle {
+    width: 36px;
+    height: 4px;
+    background: var(--border);
+    border-radius: 4px;
+    margin: 0 auto 16px;
+  }
+  .sheet-title {
+    font-family: var(--font-head);
+    font-weight: 800;
+    font-size: 20px;
+    letter-spacing: .5px;
+    margin-bottom: 14px;
+  }
+  .drive-options {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+  }
+  .drive-opt {
+    padding: 12px 8px;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    background: var(--bg3);
+    text-align: center;
+    cursor: pointer;
+    transition: all .15s;
+  }
+  .drive-opt:hover { border-color: var(--accent); }
+  .drive-opt.selected {
+    border-color: var(--accent);
+    background: rgba(0,229,255,.1);
+  }
+  .drive-opt-size {
+    font-family: var(--font-head);
+    font-weight: 800;
+    font-size: 20px;
+    color: var(--accent);
+  }
+  .drive-opt-usable {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    color: var(--muted);
+    margin-top: 2px;
+  }
+  .drive-opt-price {
+    font-family: var(--font-head);
+    font-weight: 700;
+    font-size: 13px;
+    color: var(--text);
+    margin-top: 4px;
+  }
+  .sheet-close {
+    width: 100%;
+    margin-top: 14px;
+    padding: 12px;
+    border-radius: 10px;
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    color: var(--text);
+    font-family: var(--font-head);
+    font-weight: 700;
+    font-size: 14px;
+    cursor: pointer;
+  }
+
+  /* ── BUILD SHEET ── */
+  .build-sheet {
+    max-height: 85vh;
+    display: flex;
+    flex-direction: column;
+  }
+  .build-list {
+    flex: 1;
+    overflow-y: auto;
+    margin: 0 -16px;
+    padding: 0 16px;
+    scrollbar-width: none;
+  }
+  .build-list::-webkit-scrollbar { display: none; }
+  .build-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .build-item-info { flex: 1; min-width: 0; }
+  .build-item-name {
+    font-family: var(--font-head);
+    font-weight: 700;
+    font-size: 14px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .build-item-size {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--accent);
+  }
+  .remove-btn {
+    background: rgba(255,60,110,.12);
+    border: 1px solid rgba(255,60,110,.3);
+    color: var(--accent2);
+    border-radius: 6px;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 14px;
+    flex-shrink: 0;
+  }
+  .build-summary {
+    padding: 12px 0 0;
+  }
+  .summary-row {
+    display: flex;
+    justify-content: space-between;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    padding: 4px 0;
+    color: var(--muted);
+  }
+  .summary-row span:last-child { color: var(--text); }
+  .summary-row.total span:last-child { color: var(--accent); font-size: 14px; }
+  .summary-row.remaining span:last-child { color: var(--green); }
+  .summary-row.remaining.over span:last-child { color: var(--accent2); }
+  .over-warn {
+    background: rgba(255,60,110,.12);
+    border: 1px solid rgba(255,60,110,.3);
+    border-radius: 8px;
+    padding: 8px 12px;
+    margin: 8px 0;
+    font-family: var(--font-head);
+    font-weight: 700;
+    font-size: 13px;
+    color: var(--accent2);
+    display: none;
+  }
+  .over-warn.show { display: block; }
+
+  .copy-btn {
+    width: 100%;
+    margin-top: 12px;
+    padding: 13px;
+    border-radius: 10px;
+    background: var(--accent);
+    border: none;
+    color: #000;
+    font-family: var(--font-head);
+    font-weight: 800;
+    font-size: 15px;
+    letter-spacing: .5px;
+    cursor: pointer;
+    transition: opacity .15s;
+  }
+  .copy-btn:active { opacity: .85; }
+  .copy-btn.copied {
+    background: var(--green);
+  }
+
+  .empty-build {
+    text-align: center;
+    padding: 30px 0;
+    color: var(--muted);
+    font-family: var(--font-head);
+    font-size: 15px;
+  }
+  .empty-build .big { font-size: 36px; margin-bottom: 8px; }
+
+  /* no results */
+  .no-results {
+    grid-column: 1/-1;
+    text-align: center;
+    padding: 40px 0;
+    color: var(--muted);
+    font-family: var(--font-head);
+    font-size: 16px;
+  }
+
+  /* desktop sidebar */
+  @media (min-width: 900px) {
+    body { display: grid; grid-template-columns: 1fr var(--sidebar-w); grid-template-rows: auto 1fr; }
+    header { grid-column: 1 / -1; }
+    .cats-wrap { grid-column: 1 / -1; }
+    .main { grid-column: 1; grid-row: 3; padding-bottom: 20px; }
+    .bottom-bar { display: none; }
+    .desktop-sidebar {
+      display: flex !important;
+      flex-direction: column;
+      grid-column: 2;
+      grid-row: 3;
+      position: sticky;
+      top: 80px;
+      height: calc(100vh - 80px);
+      padding: 16px;
+      border-left: 1px solid var(--border);
+      background: var(--bg2);
+      overflow-y: auto;
+    }
+  }
+  .desktop-sidebar { display: none; }
+  .desktop-sidebar .ds-title {
+    font-family: var(--font-head);
+    font-weight: 800;
+    font-size: 16px;
+    letter-spacing: .5px;
+    margin-bottom: 12px;
+    color: var(--accent);
+  }
+  .desktop-sidebar .drive-options { grid-template-columns: repeat(2, 1fr); margin-bottom: 16px; }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="header-top">
+    <div class="logo">
+      PC GAMES <span>TANDANG SORA</span>
+      <small>// GAME DRIVE PICKER</small>
+    </div>
+    <button class="drive-btn" onclick="openDriveModal()">
+      <span class="icon">💾</span>
+      <span id="drive-label">SELECT DRIVE</span>
+    </button>
+  </div>
+  <div class="search-wrap">
+    <span class="search-icon">🔍</span>
+    <input type="text" id="search-input" placeholder="Search games..." oninput="renderGames()">
+  </div>
+</header>
+
+<!-- CATEGORIES -->
+<div class="cats-wrap" id="cats-wrap">
+    <button class="cat-pill active" onclick="setGenre(&#39;All Games&#39;)">All Games</button>
+  
+    <button class="cat-pill " onclick="setGenre(&#39;2 Player&#39;)">2 Player</button>
+  
+    <button class="cat-pill " onclick="setGenre(&#39;Action&#39;)">Action</button>
+  
+    <button class="cat-pill " onclick="setGenre(&#39;Adventure&#39;)">Adventure</button>
+  
+    <button class="cat-pill " onclick="setGenre(&#39;FPS&#39;)">FPS</button>
+  
+    <button class="cat-pill " onclick="setGenre(&#39;Horror&#39;)">Horror</button>
+  
+    <button class="cat-pill " onclick="setGenre(&#39;Open World&#39;)">Open World</button>
+  
+    <button class="cat-pill " onclick="setGenre(&#39;Puzzle&#39;)">Puzzle</button>
+  
+    <button class="cat-pill " onclick="setGenre(&#39;Racing&#39;)">Racing</button>
+  
+    <button class="cat-pill " onclick="setGenre(&#39;RPG&#39;)">RPG</button>
+  
+    <button class="cat-pill " onclick="setGenre(&#39;Simulation&#39;)">Simulation</button>
+  
+    <button class="cat-pill " onclick="setGenre(&#39;Sports&#39;)">Sports</button>
+  
+    <button class="cat-pill " onclick="setGenre(&#39;Strategy&#39;)">Strategy</button>
+  </div>
+
+<!-- MAIN CONTENT -->
+<main class="main">
+  <div class="section-label" id="game-count-label"><span style="color:var(--accent)">53</span> GAMES AVAILABLE</div>
+  <div class="game-grid" id="game-grid">
+      <div class="game-card " onclick="toggleGame(1)">
+        
+        <div class="game-thumb-placeholder">⚔️</div>
+        <div class="game-info">
+          <div class="game-title">God of War Ragnarök</div>
+          <div class="game-meta">
+            <span class="game-size">45GB</span>
+            <span class="game-genre">Action</span>
+          </div>
+          <button class="add-btn ">
+            + ADD TO DRIVE
+          </button>
+        </div>
+      </div>
+    
+      <div class="game-card " onclick="toggleGame(2)">
+        
+        <div class="game-thumb-placeholder">😈</div>
+        <div class="game-info">
+          <div class="game-title">Devil May Cry 5</div>
+          <div class="game-meta">
+            <span class="game-size">35GB</span>
+            <span class="game-genre">Action</span>
+          </div>
+          <button class="add-btn ">
+            + ADD TO DRIVE
+          </button>
+        </div>
+      </div>
+    
+      <div class="game-card " onclick="toggleGame(3)">
+        
+        <div class="game-thumb-placeholder">🦇</div>
+        <div class="game-info">
+          <div class="game-title">Batman: Arkham Knight</div>
+          <div class="game-meta">
+            <span class="game-size">45GB</span>
+            <span class="game-genre">Action</span>
+          </div>
+          <button class="add-btn ">
+            + ADD TO DRIVE
+          </button>
+        </div>
+      </div>
+    
+      <div class="game-card " onclick="toggleGame(4)">
+        
+        <div class="game-thumb-placeholder">🕷️</div>
+        <div class="game-info">
+          <div class="game-title">Marvel's Spider-Man Remastered</div>
+          <div class="game-meta">
+            <span class="game-size">75GB</span>
+            <span class="game-genre">Action</span>
+          </div>
+          <button class="add-btn ">
+            + ADD TO DRIVE
+          </button>
+        </div>
+      </div>
+    
+      <div class="game-card " onclick="toggleGame(5)">
+        
+        <div class="game-thumb-placeholder">⛩️</div>
+        <div class="game-info">
+          <div class="game-title">Sekiro: Shadows Die Twice</div>
+          <div class="game-meta">
+            <span class="game-size">14GB</span>
+            <span class="game-genre">Action</span>
+          </div>
+          <button class="add-btn ">
+            + ADD TO DRIVE
+          </button>
+        </div>
+      </div>
+    
+      <div class="game-card " onclick="toggleGame(6)">
+        
+        <div class="game-thumb-placeholder">🔫</div>
+        <div class="game-info">
+          <div class="game-title">Call of Duty: Modern Warfare III</div>
+          <div class="game-meta">
+            <span class="game-size">102GB</span>
+            <span class="game-genre">FPS</span>
+          </div>
+          <button class="add-btn ">
+            + ADD TO DRIVE
+          </button>
+        </div>
+      </div>
+    
+      <div class="game-card " onclick="toggleGame(7)">
+        
+        <div class="game-thumb-placeholder">💣</div>
+        <div class="game-info">
+          <div class="game-title">Battlefield 2042</div>
+          <div class="game-meta">
+            <span class="game-size">100GB</span>
+            <span class="game-genre">FPS</span>
+          </div>
+          <button class="add-btn ">
+            + ADD TO DRIVE
+          </button>
+        </div>
+      </div>
+    
+      <div class="game-card " onclick="toggleGame(8)">
+        
+        <div class="game-thumb-placeholder">🎯</div>
+        <div class="game-info">
+          <div class="game-title">Apex Legends</div>
+          <div class="game-meta">
+            <span class="game-size">56GB</span>
+            <span class="game-genre">FPS</span>
+          </div>
+          <button class="add-btn ">
+            + ADD TO DRIVE
+          </button>
+        </div>
+      </div>
+    
+      <div class="game-card " onclick="toggleGame(9)">
+        
+        <div class="game-thumb-placeholder">👹</div>
+        <div class="game-info">
+          <div class="game-title">Doom Eternal</div>
+          <div class="game-meta">
+            <span class="game-size">50GB</span>
+            <span class="game-genre">FPS</span>
+          </div>
+          <button class="add-btn ">
+            + ADD TO DRIVE
+          </button>
+        </div>
+      </div>
+    
+      <div class="game-card " onclick="toggleGame(10)">
+        
+        <div class="game-thumb-placeholder">🪖</div>
+        <div class="game-info">
+          <div class="game-title">Halo Infinite</div>
+          <div class="game-meta">
+            <span class="game-size">50GB</span>
+            <span class="game-genre">FPS</span>
+          </div>
+          <button class="add-btn ">
+            + ADD TO DRIVE
+          </button>
+        </div>
+      </div>
+    
+      <div class="game-card " onclick="toggleGame(11)">
+        
+        <div class="game-thumb-placeholder">🌑</div>
+        <div class="game-info">
+          <div class="game-title">Elden Ring</div>
+          <div class="game-meta">
+            <span class="game-size">60GB</span>
+            <span class="game-genre">RPG</span>
+          </div>
+          <button class="add-btn ">
+            + ADD TO DRIVE
+          </button>
+        </div>
+      </div>
+    
+      <div class="game-card " onclick="toggleGame(12)">
+        
+        <div class="game-thumb-placeholder">🤖</div>
+        <div class="game-info">
+          <div class="game-title">Cyberpunk 2077</div>
+          <div class="game-meta">
+            <span class="game-size">70GB</span>
+            <span class="game-genre">RPG</span>
+          </div>
+          <button class="add-btn ">
+            + ADD TO DRIVE
+          </button>
+        </div>
+      </div>
+    
+      <div class="game-card " onclick="toggleGame(13)">
+        
+        <div class="game-thumb-placeholder">🐺</div>
+        <div class="game-info">
+          <div class="game-title">The Witcher 3 Wild Hunt</div>
+          <div class="game-meta">
+            <span class="game-size">50GB</span>
+            <span class="game-genre">RPG</span>
+          </div>
+          <button class="add-btn ">
+            + ADD TO DRIVE
+          </button>
+        </div>
+      </div>
+    
+      <div class="game-card " onclick="toggleGame(14)">
+        
+        <div class="game-thumb-placeholder">🔥</div>
+        <div class="game-info">
+          <div class="game-title">Final Fantasy XVI</div>
+          <div class="game-meta">
+            <span class="game-size">90GB</span>
+            <span class="game-genre">RPG</span>
+          </div>
+          <button class="add-btn ">
+            + ADD TO DRIVE
+          </button>
+        </div>
+      </div>
+    
+      <div class="game-card " onclick="toggleGame(15)">
+        
+        <div class="game-thumb-placeholder">🐉</div>
+        <div class="game-info">
+          <div class="game-title">Dragon's Dogma 2</div>
+          <div class="game-meta">
+            <span class="game-size">60GB</span>
+            <span class="game-genre">RPG</span>
+          </div>
+          <button class="add-btn ">
+            + ADD TO DRIVE
+          </button>
+        </div>
+      </div>
+    
+      <div class="game-card " onclick="toggleGame(16)">
+        
+        <div class="game-thumb-placeholder">🚗</div>
+        <div class="game-info">
+          <div class="game-title">GTA V</div>
+          <div class="game-meta">
+            <span class="game-size">95GB</span>
+            <span class="game-genre">Open World</span>
+          </div>
+          <button class="add-btn ">
+            + ADD TO DRIVE
+          </button>
+        </div>
+      </div>
+    
+      <div class="game-card " onclick="toggleGame(17)">
+        
+        <div class="game-thumb-placeholder">🤠</div>
+        <div class="game-info">
+          <div class="game-title">Red Dead Redemption 2</div>
+          <div class="game-meta">
+            <span class="game-size">150GB</span>
+            <span class="game-genre">Open World</span>
+          </div>
+          <button class="add-btn ">
+            + ADD TO DRIVE
+          </button>
+        </div>
+      </div>
+    
+      <div class="game-card " onclick="toggleGame(18)">
+        
+        <div class="game-thumb-placeholder">🗡️</div>
+        <div class="game-info">
+          <div class="game-title">Assassin's Creed Mirage</div>
+          <div class="game-meta">
+            <span class="game-size">40GB</span>
+            <span class="game-genre">Open World</span>
+          </div>
+          <button class="add-btn ">
+            + ADD TO DRIVE
+          </button>
+        </div>
+      </div>
+    
+      <div class="game-card " onclick="toggleGame(19)">
+        
+        <div class="game-thumb-placeholder">🪄</div>
+        <div class="game-info">
+          <div class="game-title">Hogwarts Legacy</div>
+          <div class="game-meta">
+            <span class="game-size">85GB</span>
+            <span class="game-genre">Open World</span>
+          </div>
+          <button class="add-btn ">
+            + ADD TO DRIVE
+          </button>
+        </div>
+      </div>
+    
+      <div class="game-card " onclick="toggleGame(20)">
+        
+        <div class="game-thumb-placeholder">🌸</div>
+        <div class="game-info">
+          <div class="game-title">Ghost of Tsushima</div>
+          <div class="game-meta">
+            <span class="game-size">60GB</span>
+            <span class="game-genre">Open World</span>
+          </div>
+          <button class="add-btn ">
+            + ADD TO DRIVE
+          </button>
+        </div>
+      </div>
+    
+      <div class="game-card " onclick="toggleGame(21)">
+        
+        <div class="game-thumb-placeholder">🍄</div>
+        <div class="game-info">
+          <div class="game-title">The Last of Us Part I</div>
+          <div class="game-meta">
+            <span class="game-size">79GB</span>
+            <span class="game-genre">Adventure</span>
+          </div>
+          <button class="add-btn ">
+            + ADD TO DRIVE
+          </button>
+        </div>
+      </div>
+    
+      <div class="game-card " onclick="toggleGame(22)">
+        
+        <div class="game-thumb-placeholder">🗺️</div>
+        <div class="game-info">
+          <div class="game-title">Uncharted 4</div>
+          <div class="game-meta">
+            <span class="game-size">50GB</span>
+            <span class="game-genre">Adventure</span>
+          </div>
+          <button class="add-btn ">
+            + ADD TO DRIVE
+          </button>
+        </div>
+      </div>
+    
+      <div class="game-card " onclick="toggleGame(23)">
+        
+        <div class="game-thumb-placeholder">🎭</div>
+        <div class="game-info">
+          <div class="game-title">It Takes Two</div>
+          <div class="game-meta">
+            <span class="game-size">50GB</span>
+            <span class="game-genre">Adventure</span>
+          </div>
+          <button class="add-btn ">
+            + ADD TO DRIVE
+          </button>
+        </div>
+      </div>
+    
+      <div class="game-card " onclick="toggleGame(24)">
+        
+        <div class="game-thumb-placeholder">🔦</div>
+        <div class="game-info">
+          <div class="game-title">Alan Wake 2</div>
+          <div class="game-meta">
+            <span class="game-size">90GB</span>
+            <span class="game-genre">Adventure</span>
+          </div>
+          <button class="add-btn ">
+            + ADD TO DRIVE
+          </button>
+        </div>
+      </div>
+    
+      <div class="game-card " onclick="toggleGame(25)">
+        
+        <div class="game-thumb-placeholder">🐀</div>
+        <div class="game-info">
+          <div class="game-title">A Plague Tale: Requiem</div>
+          <div class="game-meta">
+            <span class="game-size">50GB</span>
+            <span class="game-genre">Adventure</span>
+          </div>
+          <button class="add-btn ">
+            + ADD TO DRIVE
+          </button>
+        </div>
+      </div>
+    
+      <div class="game-card " onclick="toggleGame(26)">
+        
+        <div class="game-thumb-placeholder">🧟</div>
+        <div class="game-info">
+          <div class="game-title">Resident Evil 4 Remake</div>
+          <div class="game-meta">
+            <span class="game-size">67GB</span>
+            <span class="game-genre">Horror</span>
+          </div>
+          <button class="add-btn ">
+            + ADD TO DRIVE
+          </button>
+        </div>
+      </div>
+    
+      <div class="game-card " onclick="toggleGame(27)">
+        
+        <div class="game-thumb-placeholder">👾</div>
+        <div class="game-info">
+          <div class="game-title">Dead Space Remake</div>
+          <div class="game-meta">
+            <span class="game-size">50GB</span>
+            <span class="game-genre">Horror</span>
+          </div>
+          <button class="add-btn ">
+            + ADD TO DRIVE
+          </button>
+        </div>
+      </div>
+    
+      <div class="game-card " onclick="toggleGame(28)">
+        
+        <div class="game-thumb-placeholder">👽</div>
+        <div class="game-info">
+          <div class="game-title">Alien: Isolation</div>
+          <div class="game-meta">
+            <span class="game-size">30GB</span>
+            <span class="game-genre">Horror</span>
+          </div>
+          <button class="add-btn ">
+            + ADD TO DRIVE
+          </button>
+        </div>
+      </div>
+    
+      <div class="game-card " onclick="toggleGame(29)">
+        
+        <div class="game-thumb-placeholder">🔱</div>
+        <div class="game-info">
+          <div class="game-title">The Callisto Protocol</div>
+          <div class="game-meta">
+            <span class="game-size">50GB</span>
+            <span class="game-genre">Horror</span>
+          </div>
+          <button class="add-btn ">
+            + ADD TO DRIVE
+          </button>
+        </div>
+      </div>
+    
+      <div class="game-card " onclick="toggleGame(30)">
+        
+        <div class="game-thumb-placeholder">🕯️</div>
+        <div class="game-info">
+          <div class="game-title">Amnesia: The Bunker</div>
+          <div class="game-meta">
+            <span class="game-size">12GB</span>
+            <span class="game-genre">Horror</span>
+          </div>
+          <button class="add-btn ">
+            + ADD TO DRIVE
+          </button>
+        </div>
+      </div>
+    
+      <div class="game-card " onclick="toggleGame(31)">
+        
+        <div class="game-thumb-placeholder">⚽</div>
+        <div class="game-info">
+          <div class="game-title">EA FC 24</div>
+          <div class="game-meta">
+            <span class="game-size">50GB</span>
+            <span class="game-genre">Sports</span>
+          </div>
+          <button class="add-btn ">
+            + ADD TO DRIVE
+          </button>
+        </div>
+      </div>
+    
+      <div class="game-card " onclick="toggleGame(32)">
+        
+        <div class="game-thumb-placeholder">🏀</div>
+        <div class="game-info">
+          <div class="game-title">NBA 2K24</div>
+          <div class="game-meta">
+            <span class="game-size">133GB</span>
+            <span class="game-genre">Sports</span>
+          </div>
+          <button class="add-btn ">
+            + ADD TO DRIVE
+          </button>
+        </div>
+      </div>
+    
+      <div class="game-card " onclick="toggleGame(33)">
+        
+        <div class="game-thumb-placeholder">🤼</div>
+        <div class="game-info">
+          <div class="game-title">WWE 2K24</div>
+          <div class="game-meta">
+            <span class="game-size">50GB</span>
+            <span class="game-genre">Sports</span>
+          </div>
+          <button class="add-btn ">
+            + ADD TO DRIVE
+          </button>
+        </div>
+      </div>
+    
+      <div class="game-card " onclick="toggleGame(34)">
+        
+        <div class="game-thumb-placeholder">🏎️</div>
+        <div class="game-info">
+          <div class="game-title">F1 23</div>
+          <div class="game-meta">
+            <span class="game-size">35GB</span>
+            <span class="game-genre">Sports</span>
+          </div>
+          <button class="add-btn ">
+            + ADD TO DRIVE
+          </button>
+        </div>
+      </div>
+    
+      <div class="game-card " onclick="toggleGame(35)">
+        
+        <div class="game-thumb-placeholder">🏈</div>
+        <div class="game-info">
+          <div class="game-title">Madden NFL 24</div>
+          <div class="game-meta">
+            <span class="game-size">50GB</span>
+            <span class="game-genre">Sports</span>
+          </div>
+          <button class="add-btn ">
+            + ADD TO DRIVE
+          </button>
+        </div>
+      </div>
+    
+      <div class="game-card " onclick="toggleGame(36)">
+        
+        <div class="game-thumb-placeholder">🚀</div>
+        <div class="game-info">
+          <div class="game-title">Forza Horizon 5</div>
+          <div class="game-meta">
+            <span class="game-size">103GB</span>
+            <span class="game-genre">Racing</span>
+          </div>
+          <button class="add-btn ">
+            + ADD TO DRIVE
+          </button>
+        </div>
+      </div>
+    
+      <div class="game-card " onclick="toggleGame(37)">
+        
+        <div class="game-thumb-placeholder">🏁</div>
+        <div class="game-info">
+          <div class="game-title">Gran Turismo 7</div>
+          <div class="game-meta">
+            <span class="game-size">110GB</span>
+            <span class="game-genre">Racing</span>
+          </div>
+          <button class="add-btn ">
+            + ADD TO DRIVE
+          </button>
+        </div>
+      </div>
+    
+      <div class="game-card " onclick="toggleGame(38)">
+        
+        <div class="game-thumb-placeholder">🔥</div>
+        <div class="game-info">
+          <div class="game-title">Need for Speed Unbound</div>
+          <div class="game-meta">
+            <span class="game-size">50GB</span>
+            <span class="game-genre">Racing</span>
+          </div>
+          <button class="add-btn ">
+            + ADD TO DRIVE
+          </button>
+        </div>
+      </div>
+    
+      <div class="game-card " onclick="toggleGame(39)">
+        
+        <div class="game-thumb-placeholder">🌊</div>
+        <div class="game-info">
+          <div class="game-title">The Crew Motorfest</div>
+          <div class="game-meta">
+            <span class="game-size">65GB</span>
+            <span class="game-genre">Racing</span>
+          </div>
+          <button class="add-btn ">
+            + ADD TO DRIVE
+          </button>
+        </div>
+      </div>
+    
+      <div class="game-card " onclick="toggleGame(40)">
+        
+        <div class="game-thumb-placeholder">✈️</div>
+        <div class="game-info">
+          <div class="game-title">Microsoft Flight Simulator 2024</div>
+          <div class="game-meta">
+            <span class="game-size">50GB</span>
+            <span class="game-genre">Simulation</span>
+          </div>
+          <button class="add-btn ">
+            + ADD TO DRIVE
+          </button>
+        </div>
+      </div>
+    
+      <div class="game-card " onclick="toggleGame(41)">
+        
+        <div class="game-thumb-placeholder">🦁</div>
+        <div class="game-info">
+          <div class="game-title">Planet Zoo</div>
+          <div class="game-meta">
+            <span class="game-size">16GB</span>
+            <span class="game-genre">Simulation</span>
+          </div>
+          <button class="add-btn ">
+            + ADD TO DRIVE
+          </button>
+        </div>
+      </div>
+    
+      <div class="game-card " onclick="toggleGame(42)">
+        
+        <div class="game-thumb-placeholder">🌾</div>
+        <div class="game-info">
+          <div class="game-title">Stardew Valley</div>
+          <div class="game-meta">
+            <span class="game-size">1GB</span>
+            <span class="game-genre">Simulation</span>
+          </div>
+          <button class="add-btn ">
+            + ADD TO DRIVE
+          </button>
+        </div>
+      </div>
+    
+      <div class="game-card " onclick="toggleGame(43)">
+        
+        <div class="game-thumb-placeholder">🏙️</div>
+        <div class="game-info">
+          <div class="game-title">Cities: Skylines II</div>
+          <div class="game-meta">
+            <span class="game-size">16GB</span>
+            <span class="game-genre">Simulation</span>
+          </div>
+          <button class="add-btn ">
+            + ADD TO DRIVE
+          </button>
+        </div>
+      </div>
+    
+      <div class="game-card " onclick="toggleGame(44)">
+        
+        <div class="game-thumb-placeholder">🏰</div>
+        <div class="game-info">
+          <div class="game-title">Age of Empires IV</div>
+          <div class="game-meta">
+            <span class="game-size">50GB</span>
+            <span class="game-genre">Strategy</span>
+          </div>
+          <button class="add-btn ">
+            + ADD TO DRIVE
+          </button>
+        </div>
+      </div>
+    
+      <div class="game-card " onclick="toggleGame(45)">
+        
+        <div class="game-thumb-placeholder">🌍</div>
+        <div class="game-info">
+          <div class="game-title">Civilization VI</div>
+          <div class="game-meta">
+            <span class="game-size">17GB</span>
+            <span class="game-genre">Strategy</span>
+          </div>
+          <button class="add-btn ">
+            + ADD TO DRIVE
+          </button>
+        </div>
+      </div>
+    
+      <div class="game-card " onclick="toggleGame(46)">
+        
+        <div class="game-thumb-placeholder">👨‍🚀</div>
+        <div class="game-info">
+          <div class="game-title">XCOM 2</div>
+          <div class="game-meta">
+            <span class="game-size">45GB</span>
+            <span class="game-genre">Strategy</span>
+          </div>
+          <button class="add-btn ">
+            + ADD TO DRIVE
+          </button>
+        </div>
+      </div>
+    
+      <div class="game-card " onclick="toggleGame(47)">
+        
+        <div class="game-thumb-placeholder">💀</div>
+        <div class="game-info">
+          <div class="game-title">Mortal Kombat 1</div>
+          <div class="game-meta">
+            <span class="game-size">60GB</span>
+            <span class="game-genre">2 Player</span>
+          </div>
+          <button class="add-btn ">
+            + ADD TO DRIVE
+          </button>
+        </div>
+      </div>
+    
+      <div class="game-card " onclick="toggleGame(48)">
+        
+        <div class="game-thumb-placeholder">👊</div>
+        <div class="game-info">
+          <div class="game-title">Street Fighter 6</div>
+          <div class="game-meta">
+            <span class="game-size">45GB</span>
+            <span class="game-genre">2 Player</span>
+          </div>
+          <button class="add-btn ">
+            + ADD TO DRIVE
+          </button>
+        </div>
+      </div>
+    
+      <div class="game-card " onclick="toggleGame(49)">
+        
+        <div class="game-thumb-placeholder">🥊</div>
+        <div class="game-info">
+          <div class="game-title">Tekken 8</div>
+          <div class="game-meta">
+            <span class="game-size">60GB</span>
+            <span class="game-genre">2 Player</span>
+          </div>
+          <button class="add-btn ">
+            + ADD TO DRIVE
+          </button>
+        </div>
+      </div>
+    
+      <div class="game-card " onclick="toggleGame(50)">
+        
+        <div class="game-thumb-placeholder">🎭</div>
+        <div class="game-info">
+          <div class="game-title">It Takes Two</div>
+          <div class="game-meta">
+            <span class="game-size">50GB</span>
+            <span class="game-genre">2 Player</span>
+          </div>
+          <button class="add-btn ">
+            + ADD TO DRIVE
+          </button>
+        </div>
+      </div>
+    
+      <div class="game-card " onclick="toggleGame(51)">
+        
+        <div class="game-thumb-placeholder">🌀</div>
+        <div class="game-info">
+          <div class="game-title">Portal 2</div>
+          <div class="game-meta">
+            <span class="game-size">8GB</span>
+            <span class="game-genre">Puzzle</span>
+          </div>
+          <button class="add-btn ">
+            + ADD TO DRIVE
+          </button>
+        </div>
+      </div>
+    
+      <div class="game-card " onclick="toggleGame(52)">
+        
+        <div class="game-thumb-placeholder">🔲</div>
+        <div class="game-info">
+          <div class="game-title">The Witness</div>
+          <div class="game-meta">
+            <span class="game-size">3GB</span>
+            <span class="game-genre">Puzzle</span>
+          </div>
+          <button class="add-btn ">
+            + ADD TO DRIVE
+          </button>
+        </div>
+      </div>
+    
+      <div class="game-card " onclick="toggleGame(53)">
+        
+        <div class="game-thumb-placeholder">🔮</div>
+        <div class="game-info">
+          <div class="game-title">Superliminal</div>
+          <div class="game-meta">
+            <span class="game-size">3GB</span>
+            <span class="game-genre">Puzzle</span>
+          </div>
+          <button class="add-btn ">
+            + ADD TO DRIVE
+          </button>
+        </div>
+      </div>
+    </div>
+</main>
+
+<!-- DESKTOP SIDEBAR -->
+<aside class="desktop-sidebar" id="desktop-sidebar">
+  <div class="ds-title">💾 SELECT DRIVE SIZE</div>
+  <div class="drive-options" id="ds-drive-opts">
+    <div class="drive-opt " onclick="selectDrive(1)">
+      <div class="drive-opt-size">500GB</div>
+      <div class="drive-opt-usable">465GB usable</div>
+      <div class="drive-opt-price">₱600</div>
+    </div>
+  
+    <div class="drive-opt " onclick="selectDrive(2)">
+      <div class="drive-opt-size">1TB</div>
+      <div class="drive-opt-usable">930GB usable</div>
+      <div class="drive-opt-price">₱900</div>
+    </div>
+  
+    <div class="drive-opt " onclick="selectDrive(3)">
+      <div class="drive-opt-size">2TB</div>
+      <div class="drive-opt-usable">1860GB usable</div>
+      <div class="drive-opt-price">₱1,400</div>
+    </div>
+  
+    <div class="drive-opt " onclick="selectDrive(4)">
+      <div class="drive-opt-size">4TB</div>
+      <div class="drive-opt-usable">3720GB usable</div>
+      <div class="drive-opt-price">₱2,500</div>
+    </div>
+  
+    <div class="drive-opt " onclick="selectDrive(5)">
+      <div class="drive-opt-size">6TB</div>
+      <div class="drive-opt-usable">5580GB usable</div>
+      <div class="drive-opt-price">₱3,500</div>
+    </div>
+  
+    <div class="drive-opt " onclick="selectDrive(6)">
+      <div class="drive-opt-size">8TB</div>
+      <div class="drive-opt-usable">7440GB usable</div>
+      <div class="drive-opt-price">₱4,500</div>
+    </div>
+  </div>
+  <div class="ds-title" style="margin-top:4px">🎮 YOUR BUILD</div>
+  <div id="ds-build-content"></div>
+</aside>
+
+<!-- BOTTOM BAR (mobile) -->
+<div class="bottom-bar">
+  <div class="bar-stats">
+    <div class="bar-progress">
+      <div class="bar-progress-fill" id="bar-fill" style="width:0%"></div>
+    </div>
+    <div class="bar-numbers">
+      <span class="bar-used" id="bar-used">0 GB used</span>
+      <span class="bar-remaining" id="bar-remaining">No drive selected</span>
+    </div>
+  </div>
+  <button class="view-build-btn" onclick="openBuildSheet()">
+    MY BUILD <span class="count" id="build-count">0</span>
+  </button>
+</div>
+
+<!-- DRIVE SELECT MODAL -->
+<div class="modal-overlay" id="drive-modal" onclick="if(event.target===this)closeDriveModal()">
+  <div class="modal-sheet">
+    <div class="sheet-handle"></div>
+    <div class="sheet-title">💾 SELECT DRIVE SIZE</div>
+    <div class="drive-options" id="modal-drive-opts">
+    <div class="drive-opt " onclick="selectDrive(1)">
+      <div class="drive-opt-size">500GB</div>
+      <div class="drive-opt-usable">465GB usable</div>
+      <div class="drive-opt-price">₱600</div>
+    </div>
+  
+    <div class="drive-opt " onclick="selectDrive(2)">
+      <div class="drive-opt-size">1TB</div>
+      <div class="drive-opt-usable">930GB usable</div>
+      <div class="drive-opt-price">₱900</div>
+    </div>
+  
+    <div class="drive-opt " onclick="selectDrive(3)">
+      <div class="drive-opt-size">2TB</div>
+      <div class="drive-opt-usable">1860GB usable</div>
+      <div class="drive-opt-price">₱1,400</div>
+    </div>
+  
+    <div class="drive-opt " onclick="selectDrive(4)">
+      <div class="drive-opt-size">4TB</div>
+      <div class="drive-opt-usable">3720GB usable</div>
+      <div class="drive-opt-price">₱2,500</div>
+    </div>
+  
+    <div class="drive-opt " onclick="selectDrive(5)">
+      <div class="drive-opt-size">6TB</div>
+      <div class="drive-opt-usable">5580GB usable</div>
+      <div class="drive-opt-price">₱3,500</div>
+    </div>
+  
+    <div class="drive-opt " onclick="selectDrive(6)">
+      <div class="drive-opt-size">8TB</div>
+      <div class="drive-opt-usable">7440GB usable</div>
+      <div class="drive-opt-price">₱4,500</div>
+    </div>
+  </div>
+    <button class="sheet-close" onclick="closeDriveModal()">DONE</button>
+  </div>
+</div>
+
+<!-- BUILD SHEET MODAL -->
+<div class="modal-overlay" id="build-modal" onclick="if(event.target===this)closeBuildSheet()">
+  <div class="modal-sheet build-sheet">
+    <div class="sheet-handle"></div>
+    <div class="sheet-title">🎮 MY BUILD</div>
+    <div class="build-list" id="build-list"></div>
+    <div class="build-summary" id="build-summary"></div>
+    <button class="copy-btn" id="copy-btn" onclick="copySummary()">📋 COPY ORDER SUMMARY</button>
+    <button class="sheet-close" onclick="closeBuildSheet()">CLOSE</button>
+  </div>
+</div>
+
+<script>
+// ── DATA ──
+const DRIVES = [
+  { id: 1, label: '500GB', gb: 500,  price: '₱600' },
+  { id: 2, label: '1TB',   gb: 1000, price: '₱900' },
+  { id: 3, label: '2TB',   gb: 2000, price: '₱1,400' },
+  { id: 4, label: '4TB',   gb: 4000, price: '₱2,500' },
+  { id: 5, label: '6TB',   gb: 6000, price: '₱3,500' },
+  { id: 6, label: '8TB',   gb: 8000, price: '₱4,500' },
+];
+
+const USABLE = 0.93;
+
+const GAMES = [
+  // Action
+  { id:1,  title:'God of War Ragnarök', gb:45, genre:'Action', emoji:'⚔️' },
+  { id:2,  title:'Devil May Cry 5', gb:35, genre:'Action', emoji:'😈' },
+  { id:3,  title:'Batman: Arkham Knight', gb:45, genre:'Action', emoji:'🦇' },
+  { id:4,  title:'Marvel\'s Spider-Man Remastered', gb:75, genre:'Action', emoji:'🕷️' },
+  { id:5,  title:'Sekiro: Shadows Die Twice', gb:14, genre:'Action', emoji:'⛩️' },
+  // FPS
+  { id:6,  title:'Call of Duty: Modern Warfare III', gb:102, genre:'FPS', emoji:'🔫' },
+  { id:7,  title:'Battlefield 2042', gb:100, genre:'FPS', emoji:'💣' },
+  { id:8,  title:'Apex Legends', gb:56, genre:'FPS', emoji:'🎯' },
+  { id:9,  title:'Doom Eternal', gb:50, genre:'FPS', emoji:'👹' },
+  { id:10, title:'Halo Infinite', gb:50, genre:'FPS', emoji:'🪖' },
+  // RPG
+  { id:11, title:'Elden Ring', gb:60, genre:'RPG', emoji:'🌑' },
+  { id:12, title:'Cyberpunk 2077', gb:70, genre:'RPG', emoji:'🤖' },
+  { id:13, title:'The Witcher 3 Wild Hunt', gb:50, genre:'RPG', emoji:'🐺' },
+  { id:14, title:'Final Fantasy XVI', gb:90, genre:'RPG', emoji:'🔥' },
+  { id:15, title:'Dragon\'s Dogma 2', gb:60, genre:'RPG', emoji:'🐉' },
+  // Open World
+  { id:16, title:'GTA V', gb:95, genre:'Open World', emoji:'🚗' },
+  { id:17, title:'Red Dead Redemption 2', gb:150, genre:'Open World', emoji:'🤠' },
+  { id:18, title:'Assassin\'s Creed Mirage', gb:40, genre:'Open World', emoji:'🗡️' },
+  { id:19, title:'Hogwarts Legacy', gb:85, genre:'Open World', emoji:'🪄' },
+  { id:20, title:'Ghost of Tsushima', gb:60, genre:'Open World', emoji:'🌸' },
+  // Adventure
+  { id:21, title:'The Last of Us Part I', gb:79, genre:'Adventure', emoji:'🍄' },
+  { id:22, title:'Uncharted 4', gb:50, genre:'Adventure', emoji:'🗺️' },
+  { id:23, title:'It Takes Two', gb:50, genre:'Adventure', emoji:'🎭' },
+  { id:24, title:'Alan Wake 2', gb:90, genre:'Adventure', emoji:'🔦' },
+  { id:25, title:'A Plague Tale: Requiem', gb:50, genre:'Adventure', emoji:'🐀' },
+  // Horror
+  { id:26, title:'Resident Evil 4 Remake', gb:67, genre:'Horror', emoji:'🧟' },
+  { id:27, title:'Dead Space Remake', gb:50, genre:'Horror', emoji:'👾' },
+  { id:28, title:'Alien: Isolation', gb:30, genre:'Horror', emoji:'👽' },
+  { id:29, title:'The Callisto Protocol', gb:50, genre:'Horror', emoji:'🔱' },
+  { id:30, title:'Amnesia: The Bunker', gb:12, genre:'Horror', emoji:'🕯️' },
+  // Sports
+  { id:31, title:'EA FC 24', gb:50, genre:'Sports', emoji:'⚽' },
+  { id:32, title:'NBA 2K24', gb:133, genre:'Sports', emoji:'🏀' },
+  { id:33, title:'WWE 2K24', gb:50, genre:'Sports', emoji:'🤼' },
+  { id:34, title:'F1 23', gb:35, genre:'Sports', emoji:'🏎️' },
+  { id:35, title:'Madden NFL 24', gb:50, genre:'Sports', emoji:'🏈' },
+  // Racing
+  { id:36, title:'Forza Horizon 5', gb:103, genre:'Racing', emoji:'🚀' },
+  { id:37, title:'Gran Turismo 7', gb:110, genre:'Racing', emoji:'🏁' },
+  { id:38, title:'Need for Speed Unbound', gb:50, genre:'Racing', emoji:'🔥' },
+  { id:39, title:'The Crew Motorfest', gb:65, genre:'Racing', emoji:'🌊' },
+  // Simulation
+  { id:40, title:'Microsoft Flight Simulator 2024', gb:50, genre:'Simulation', emoji:'✈️' },
+  { id:41, title:'Planet Zoo', gb:16, genre:'Simulation', emoji:'🦁' },
+  { id:42, title:'Stardew Valley', gb:1, genre:'Simulation', emoji:'🌾' },
+  { id:43, title:'Cities: Skylines II', gb:16, genre:'Simulation', emoji:'🏙️' },
+  // Strategy
+  { id:44, title:'Age of Empires IV', gb:50, genre:'Strategy', emoji:'🏰' },
+  { id:45, title:'Civilization VI', gb:17, genre:'Strategy', emoji:'🌍' },
+  { id:46, title:'XCOM 2', gb:45, genre:'Strategy', emoji:'👨‍🚀' },
+  // 2 Player
+  { id:47, title:'Mortal Kombat 1', gb:60, genre:'2 Player', emoji:'💀' },
+  { id:48, title:'Street Fighter 6', gb:45, genre:'2 Player', emoji:'👊' },
+  { id:49, title:'Tekken 8', gb:60, genre:'2 Player', emoji:'🥊' },
+  { id:50, title:'It Takes Two', gb:50, genre:'2 Player', emoji:'🎭' },
+  // Puzzle
+  { id:51, title:'Portal 2', gb:8, genre:'Puzzle', emoji:'🌀' },
+  { id:52, title:'The Witness', gb:3, genre:'Puzzle', emoji:'🔲' },
+  { id:53, title:'Superliminal', gb:3, genre:'Puzzle', emoji:'🔮' },
+];
+
+const GENRES = ['All Games','2 Player','Action','Adventure','FPS','Horror','Open World','Puzzle','Racing','RPG','Simulation','Sports','Strategy'];
+
+// ── STATE ──
+let selectedDrive = null;
+let selectedGames = {}; // id -> game
+let activeGenre = 'All Games';
+
+// ── INIT ──
+function init() {
+  renderCats();
+  renderGames();
+  renderDriveOptions();
+  updateBottomBar();
+}
+
+// ── CATEGORIES ──
+function renderCats() {
+  const wrap = document.getElementById('cats-wrap');
+  wrap.innerHTML = GENRES.map(g => `
+    <button class="cat-pill ${g === activeGenre ? 'active' : ''}" onclick="setGenre('${g}')">${g}</button>
+  `).join('');
+}
+
+function setGenre(g) {
+  activeGenre = g;
+  renderCats();
+  renderGames();
+}
+
+// ── GAMES ──
+function renderGames() {
+  const q = document.getElementById('search-input').value.toLowerCase();
+  let filtered = GAMES.filter(g => {
+    const matchCat = activeGenre === 'All Games' || g.genre === activeGenre;
+    const matchSearch = g.title.toLowerCase().includes(q) || g.genre.toLowerCase().includes(q);
+    return matchCat && matchSearch;
+  });
+
+  document.getElementById('game-count-label').innerHTML =
+    `<span style="color:var(--accent)">${filtered.length}</span> GAMES AVAILABLE`;
+
+  const grid = document.getElementById('game-grid');
+  if (filtered.length === 0) {
+    grid.innerHTML = '<div class="no-results">😕 No games found</div>';
+    return;
+  }
+
+  grid.innerHTML = filtered.map(g => {
+    const isAdded = !!selectedGames[g.id];
+    return `
+      <div class="game-card ${isAdded ? 'added' : ''}" onclick="toggleGame(${g.id})">
+        ${isAdded ? '<div class="added-badge">✓ ADDED</div>' : ''}
+        <div class="game-thumb-placeholder">${g.emoji}</div>
+        <div class="game-info">
+          <div class="game-title">${g.title}</div>
+          <div class="game-meta">
+            <span class="game-size">${g.gb}GB</span>
+            <span class="game-genre">${g.genre}</span>
+          </div>
+          <button class="add-btn ${isAdded ? 'added-state' : ''}">
+            ${isAdded ? '✓ ADDED' : '+ ADD TO DRIVE'}
+          </button>
+        </div>
+      </div>
+    `;
+  }).join('');
+}
+
+// ── TOGGLE GAME ──
+function toggleGame(id) {
+  const game = GAMES.find(g => g.id === id);
+  if (!game) return;
+  if (selectedGames[id]) {
+    delete selectedGames[id];
+  } else {
+    selectedGames[id] = game;
+  }
+  renderGames();
+  updateBottomBar();
+  updateDesktopBuild();
+}
+
+// ── DRIVE OPTIONS ──
+function renderDriveOptions() {
+  const opts = DRIVES.map(d => `
+    <div class="drive-opt ${selectedDrive?.id === d.id ? 'selected' : ''}" onclick="selectDrive(${d.id})">
+      <div class="drive-opt-size">${d.label}</div>
+      <div class="drive-opt-usable">${Math.floor(d.gb * USABLE)}GB usable</div>
+      <div class="drive-opt-price">${d.price}</div>
+    </div>
+  `).join('');
+  const mo = document.getElementById('modal-drive-opts');
+  const ds = document.getElementById('ds-drive-opts');
+  if (mo) mo.innerHTML = opts;
+  if (ds) ds.innerHTML = opts;
+}
+
+function selectDrive(id) {
+  selectedDrive = DRIVES.find(d => d.id === id);
+  document.getElementById('drive-label').textContent = selectedDrive.label;
+  renderDriveOptions();
+  updateBottomBar();
+  updateDesktopBuild();
+}
+
+// ── BOTTOM BAR ──
+function getTotalGB() {
+  return Object.values(selectedGames).reduce((s, g) => s + g.gb, 0);
+}
+function getUsableGB() {
+  return selectedDrive ? Math.floor(selectedDrive.gb * USABLE) : 0;
+}
+
+function updateBottomBar() {
+  const total = getTotalGB();
+  const usable = getUsableGB();
+  const count = Object.keys(selectedGames).length;
+
+  document.getElementById('build-count').textContent = count;
+
+  const fill = document.getElementById('bar-fill');
+  const usedEl = document.getElementById('bar-used');
+  const remEl = document.getElementById('bar-remaining');
+
+  usedEl.textContent = `${total} GB used`;
+
+  if (!selectedDrive) {
+    fill.style.width = '0%';
+    remEl.textContent = 'No drive selected';
+    remEl.className = 'bar-remaining';
+    fill.className = 'bar-progress-fill';
+  } else {
+    const rem = usable - total;
+    const pct = Math.min((total / usable) * 100, 100);
+    fill.style.width = pct + '%';
+    if (rem < 0) {
+      remEl.textContent = `OVER by ${Math.abs(rem)} GB`;
+      remEl.className = 'bar-remaining over';
+      fill.className = 'bar-progress-fill over';
+    } else {
+      remEl.textContent = `${rem} GB free`;
+      remEl.className = 'bar-remaining';
+      fill.className = 'bar-progress-fill';
+    }
+  }
+}
+
+// ── BUILD SHEET ──
+function openBuildSheet() {
+  renderBuildSheet();
+  document.getElementById('build-modal').classList.add('open');
+}
+function closeBuildSheet() {
+  document.getElementById('build-modal').classList.remove('open');
+}
+
+function renderBuildSheet() {
+  const games = Object.values(selectedGames);
+  const total = getTotalGB();
+  const usable = getUsableGB();
+  const rem = usable - total;
+  const isOver = selectedDrive && rem < 0;
+
+  const listEl = document.getElementById('build-list');
+  const summEl = document.getElementById('build-summary');
+
+  if (games.length === 0) {
+    listEl.innerHTML = '<div class="empty-build"><div class="big">🎮</div>No games added yet.<br>Browse and tap a game to add it!</div>';
+    summEl.innerHTML = '';
+    return;
+  }
+
+  listEl.innerHTML = games.map(g => `
+    <div class="build-item">
+      <div style="font-size:22px">${g.emoji}</div>
+      <div class="build-item-info">
+        <div class="build-item-name">${g.title}</div>
+        <div class="build-item-size">${g.gb} GB</div>
+      </div>
+      <button class="remove-btn" onclick="removeGame(${g.id})">✕</button>
+    </div>
+  `).join('');
+
+  let summHTML = `
+    <div class="over-warn ${isOver ? 'show' : ''}">⚠️ SOBRA NA SA CAPACITY! (${Math.abs(rem)} GB over)</div>
+    <div class="summary-row total"><span>TOTAL USED</span><span>${total} GB</span></div>
+  `;
+  if (selectedDrive) {
+    summHTML += `
+      <div class="summary-row"><span>DRIVE SIZE</span><span>${selectedDrive.label} (${usable}GB usable)</span></div>
+      <div class="summary-row remaining ${isOver ? 'over' : ''}">
+        <span>REMAINING</span><span>${isOver ? '−' + Math.abs(rem) : rem} GB</span>
+      </div>
+    `;
+  }
+  summEl.innerHTML = summHTML;
+}
+
+function removeGame(id) {
+  delete selectedGames[id];
+  renderGames();
+  updateBottomBar();
+  renderBuildSheet();
+  updateDesktopBuild();
+}
+
+// ── COPY SUMMARY ──
+function copySummary() {
+  const games = Object.values(selectedGames);
+  const total = getTotalGB();
+  const usable = getUsableGB();
+  const rem = usable - total;
+
+  let text = `PC GAMES TANDANG SORA - ORDER SUMMARY\n`;
+  text += `=====================================\n`;
+  text += `Drive: ${selectedDrive ? selectedDrive.label : 'Not selected'} (${usable}GB usable)\n`;
+  text += `Total Used: ${total} GB\n`;
+  text += `Remaining: ${selectedDrive ? rem + ' GB' : 'N/A'}\n\n`;
+  text += `SELECTED GAMES:\n`;
+  games.forEach((g, i) => {
+    text += `${i+1}. ${g.title} — ${g.gb} GB\n`;
+  });
+  text += `\nContact us on Facebook: PC Games Tandang Sora`;
+
+  navigator.clipboard.writeText(text).then(() => {
+    const btn = document.getElementById('copy-btn');
+    btn.textContent = '✅ COPIED!';
+    btn.classList.add('copied');
+    setTimeout(() => {
+      btn.textContent = '📋 COPY ORDER SUMMARY';
+      btn.classList.remove('copied');
+    }, 2000);
+  });
+}
+
+// ── DRIVE MODAL ──
+function openDriveModal() {
+  renderDriveOptions();
+  document.getElementById('drive-modal').classList.add('open');
+}
+function closeDriveModal() {
+  document.getElementById('drive-modal').classList.remove('open');
+}
+
+// ── DESKTOP BUILD ──
+function updateDesktopBuild() {
+  const el = document.getElementById('ds-build-content');
+  if (!el) return;
+  const games = Object.values(selectedGames);
+  const total = getTotalGB();
+  const usable = getUsableGB();
+  const rem = usable - total;
+  const isOver = selectedDrive && rem < 0;
+
+  if (games.length === 0) {
+    el.innerHTML = '<div style="color:var(--muted);font-family:var(--font-head);font-size:13px;padding:10px 0">No games added yet.</div>';
+    return;
+  }
+
+  let html = games.map(g => `
+    <div class="build-item">
+      <div style="font-size:18px">${g.emoji}</div>
+      <div class="build-item-info">
+        <div class="build-item-name">${g.title}</div>
+        <div class="build-item-size">${g.gb} GB</div>
+      </div>
+      <button class="remove-btn" onclick="removeGame(${g.id})" style="width:24px;height:24px;font-size:11px">✕</button>
+    </div>
+  `).join('');
+
+  html += `<div class="build-summary">`;
+  if (isOver) html += `<div class="over-warn show" style="font-size:12px">⚠️ OVER by ${Math.abs(rem)} GB</div>`;
+  html += `<div class="summary-row total"><span>TOTAL</span><span>${total} GB</span></div>`;
+  if (selectedDrive) {
+    html += `<div class="summary-row remaining ${isOver?'over':''}"><span>REMAINING</span><span>${isOver?'−'+Math.abs(rem):rem} GB</span></div>`;
+  }
+  html += `</div>`;
+  html += `<button class="copy-btn" onclick="copySummary()" style="margin-top:10px;font-size:13px">📋 COPY SUMMARY</button>`;
+
+  el.innerHTML = html;
+}
+
+init();
+</script>
+
+
+</body></html>
